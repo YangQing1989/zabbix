@@ -1,0 +1,50 @@
+#发现物理磁盘
+cat > Physical_Disks_ID_Discovery.py <<'EOF' 
+#!/usr/bin/env python
+
+import json
+import os
+
+result=[]
+cmd=os.popen("""/opt/dell/srvadmin/bin/omreport storage pdisk controller=0 | grep ^ID | cut -c35-""")
+ 
+for item in cmd.readlines():
+    item=item.strip()
+    result+=[{"{#PHYSICALDISKSID}": item}]
+ 
+print(json.dumps(result))
+EOF
+
+#发现虚拟磁盘
+cat > Virtual_Disks_ID_Discovery.py  <<'EOF'
+#!/usr/bin/env python
+
+import json
+import os
+
+result=[]
+cmd=os.popen("""/opt/dell/srvadmin/bin/omreport storage vdisk | grep ^ID | cut -c37-""")
+ 
+for item in cmd.readlines():
+    item=item.strip()
+    result+=[{"{#VIRTUALDISKSID}": item}]
+ 
+print(json.dumps(result))
+EOF
+
+#发现存储Connector
+cat > Storage_Connector_Discovery.py <<'EOF' 
+#!/usr/bin/env python
+
+import json
+import os
+
+result=[]
+cmd=os.popen("""/opt/dell/srvadmin/bin/omreport storage connector controller=0 | grep ^ID | cut -c18-""")
+ 
+for item in cmd.readlines():
+    item=item.strip()
+    result+=[{"{#STORAGECONNECTORID}": item}]
+ 
+print(json.dumps(result))
+EOF
