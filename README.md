@@ -12,8 +12,6 @@ UserParameter=Process.discovery,/etc/zabbix/script/Process_Discovery.py
 脚本内容如下：
 ```
 #!/usr/bin/env python
-#yq
-#2020-04-22
 
 import json
 import os
