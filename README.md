@@ -19,7 +19,7 @@ import json
 import os
  
 result=[]
-cmd=os.popen("""ps -ef | grep '\./' | grep -v grep | grep -Ev '/bin/bash|/bin/sh|python|zabbix|autossh|query-rem|query|sze-log|ctp-log|sse-log' | awk '{print $1,$8}' | sort -nr | uniq -c""")
+cmd=os.popen("""ps -ef | grep '\./' | grep -v grep | grep -Ev '/bin/bash|/bin/sh|python' | awk '{print $1,$8}' | sort -nr | uniq -c""")
  
 for item in cmd.readlines():
     item=item.strip()
@@ -27,7 +27,7 @@ for item in cmd.readlines():
  
 print json.dumps(result)
 ```
-## 配置发现规则（主机发现完成以后，可以disable此规则）
+## 配置发现规则（发现完成以后，可以disable此规则）
 ![image](https://user-images.githubusercontent.com/26144773/119589747-0d784880-be06-11eb-8a87-63b2f790ecd9.png)
 ![image](https://user-images.githubusercontent.com/26144773/119589779-1d902800-be06-11eb-9372-662713dc48fe.png)
 ![image](https://user-images.githubusercontent.com/26144773/119589802-2b45ad80-be06-11eb-95a6-f553b1dac9e5.png)
